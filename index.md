@@ -1,37 +1,56 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shopping List Check Off</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        .errorMessage,
+        .emptyMessage {
+            font-weight: bold;
+            color: red;
+            font-size: 1.2em;
+        }
+        li {
+            margin-bottom: 7px;
+            font-size: 1.2em;
+        }
+        li > button {
+            margin-left: 6px;
+        }
+        button > span {
+            color: green;
+        }
+    </style>
+</head>
+<body ng-app="ShoppingListCheckOff">
+<div class="container">
+    <h1>Shopping List Check Off</h1>
 
-You can use the [editor on GitHub](https://github.com/Bukovski95/Module-2/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+    <div class="row">
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        <!-- To Buy List -->
+        <div class="col-md-6" ng-controller="ToBuyController as toBuy">
 
-### Markdown
+            <h2>To Buy:</h2>
+            <ul>
+                <li ng-repeat="item in toBuy.items">Buy {{item.quantity}} {{item.name}} <button ng-click="item.boughtItem($index)" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+            </ul>
+            <div ng-if="toBuy.items.length === 0" class="emptyMessage">Everything is bought!</div>
+        </div>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+        <!-- Already Bought List -->
+        <div class="col-md-6" ng-controller="AlreadyBoughtController as alreadyBought">
+            <h2>Already Bought:</h2>
+            <ul>
+                <li ng-repeat="item in alreadyBought.items">Bought {{item.quantity}} {{item.name}}</li>
+            </ul>
+            <div ng-if="alreadyBought.items.length === 0" class="emptyMessage">Nothing bought yet.</div>
+        </div>
+    </div>
+</div>
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Bukovski95/Module-2/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+</body>
+</html>
